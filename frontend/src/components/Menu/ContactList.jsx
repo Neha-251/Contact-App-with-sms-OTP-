@@ -9,6 +9,7 @@ export const ContactList = () => {
 
     const dispatch = useDispatch();
     const allContacts = useSelector(state => state.contact.contacts);
+    console.log('allContacts', allContacts)
     const singleContact = useSelector(state => state.contact.singleContact);
     const contactLoading = useSelector(state => state.contact.contactLoadind)
     const totalPage = useSelector(state => state.contact.totalPage);
@@ -64,7 +65,7 @@ export const ContactList = () => {
     <div className='pr-6'>
                 {
                     allContacts.map((el, ind) => {
-                        if(allContacts.length === ind+3){
+                        if(allContacts.length === ind+7){
                             return (
                                 <div ref={lastUserRef} className={ el._id===singleContact._id? "p-2 bg-pink-700 rounded-lg cursor-pointer" :"p-2 cursor-pointer"} key={el._id} onClick={()=> handleClick(el._id)}>
                                     <div>

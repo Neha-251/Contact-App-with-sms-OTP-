@@ -10,7 +10,9 @@ const initialState = {
     contactLoading: false
 }
 
-
+// const photos = state.photos ?
+//       [...state.photos, ...action.data.photo] :
+//       action.data.photo;
 export const contactReducer = (state = initialState, {type, payload}) => {
     switch (type){
         case FETCH_ERROR:
@@ -18,7 +20,10 @@ export const contactReducer = (state = initialState, {type, payload}) => {
         case CONTACT_LOADING:
             return { ...state, payload: payload}
         case ALL_CONTACT:
-            return { ...state, fetchError: false, contactLoading: false,  contacts: payload}
+            return {
+                ...state, fetchError: false, contactLoading: false, 
+                contacts: [...state.contacts, ...payload]
+            }
         case SINGLE_CONTACT:
             return { ...state, fetchError: false, singleContact: payload}
         case TOTAL_PAGE:

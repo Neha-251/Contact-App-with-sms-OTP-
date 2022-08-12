@@ -50,16 +50,6 @@ export const getAllContact = (page, pagesize) => (dispatch) =>{
     .then((res) => {
         let newData = res.data.contacts
         console.log('newData', newData)
-
-        // if(page > 1){
-        // let oldData = useSelector(state => state.contact.contacts);
-
-        //     console.log('oldData', oldData)
-        //     dispatch(setAllContact(newData)); 
-        //     let pages = Math.ceil(res.data.totalpages);
-        //     dispatch(setTotalPage(pages))
-
-        // } else {
             dispatch(setAllContact(newData)); 
             let pages = Math.ceil(res.data.totalpages);
             dispatch(setTotalPage(pages))
