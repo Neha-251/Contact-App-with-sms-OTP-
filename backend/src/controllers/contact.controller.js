@@ -2,16 +2,28 @@ const express = require('express');
 const Contact = require('../models/contact.model');
 
 const router = express.Router();
+console.log("yes came here")
 
-router.post('/create', async(req, res) => {
+// router.post("/", async(req, res) => {
+//     try{
+//         const todos = await Todo.create(req.body);
+//         return res.status(201).send(todos);
+//     }
+//     catch(err) {
+//         return res.status(500).send({message: err})
+//     }
+// });
+
+router.post('/', async(req, res) => {
+    console.log('req', req.body)
+
     try{
         await Contact.create(req.body);
-
         return res.status(200).send({message: 'Contact is Saved'});
-
     }
     catch(err) {
-        return res.status(400).send({message: err.message})
+        return res.status(440).send(err)
+        // return res.status(440).send({message: err.message})
     }
 })
 
