@@ -18,12 +18,13 @@ router.post('/', async(req, res) => {
     console.log('req', req.body)
 
     try{
-        await Contact.create(req.body);
-        return res.status(200).send({message: 'Contact is Saved'});
+        const contact = await Contact.create(req.body);
+        return res.status(200).send(contact);
+        // return res.status(200).send({message: 'Contact is Saved'});
     }
     catch(err) {
-        return res.status(440).send(err)
-        // return res.status(440).send({message: err.message})
+        // return res.status(440).send(err)
+        return res.status(440).send({message: err.message})
     }
 })
 
