@@ -18,7 +18,7 @@ export const ContactDetails = () => {
     const [city, setCity] = useState('')
 
     useEffect(() => {
-        dispatch(setLoading(false))
+        
         setCity(singleContact.address)
     }, [singleContact])
 
@@ -27,10 +27,10 @@ export const ContactDetails = () => {
 
         {window.innerWidth <= 460 && <Home/>}
         
-            <div className=' lg:h-full md:h-full h-screen py-2 md:py-0 lg:py-0 md:bg-transparent lg:bg-transparent'>
+            <div className='border-l lg:h-full md:h-full h-screen py-2 md:py-0 lg:py-0 md:bg-transparent lg:bg-transparent'>
                 {loading && <Loading />}
                 {singleContact._id ?
-                    <div className='border-l p-2 text-white fixed z-10'>
+                    <div className='p-2 text-white fixed z-10'>
                         <div className='flex'>
                             <AiOutlineUser className='text-5xl' />
                             <div>
@@ -52,7 +52,7 @@ export const ContactDetails = () => {
                         </div>
                     </div>
 
-                    : <p className='border-l w-96 opacity-60 leading-normal p-2 fixed z-10 text-7xl' >Click on a contact to see details</p>
+                    : <p className='w-96 opacity-60 leading-normal p-2 fixed z-10 text-6xl' >Click on a contact to see details</p>
                 }
             </div>
         </>

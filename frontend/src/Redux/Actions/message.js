@@ -1,17 +1,16 @@
-import { ALL_CONTACT, SINGLE_CONTACT, FETCH_ERROR, TOTAL_PAGE, LOADING, CONTACT_LOADING} from '../Constants/contact'
+import { ALL_MESSAGE, SINGLE_MESSAGE, FETCH_ERROR, TOTAL_PAGE, LOADING, MESSAGE_LOADING} from '../Constants/message'
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
-export const setAllContact = (payload)=> {
+export const setAllMessage = (payload)=> {
     return {
-        type: ALL_CONTACT,
+        type: ALL_MESSAGE,
         payload: payload
     }
 }
 
-export const setSingleContact = (payload)=> {
+export const setSingleMessage = (payload)=> {
     return {
-        type: SINGLE_CONTACT,
+        type: SINGLE_MESSAGE,
         payload: payload
     }
 }
@@ -37,25 +36,26 @@ export const setLoading = (payload) => {
     }
 }
 
-export const setContactLoading = (payload) => {
+export const setMessageLoading = (payload) => {
     return{
-        type: CONTACT_LOADING,
+        type: MESSAGE_LOADING,
         payload: payload
     }
 }
 
 
-export const getAllContact = (page, pagesize) => (dispatch) =>{
+export const getAllMessage = (page, pagesize) => (dispatch) =>{
     dispatch(setLoading(true))
-    axios(`https://contact-app-neha.herokuapp.com/contact/get/all?page=${page}&pagesize=${pagesize}`)
+
+    axios(`https://contact-app-neha.herokuapp.com/message/get/all?page=${page}&pagesize=${pagesize}`)
     .then((res) => {
-        let newData = res.data.contacts
+        let newData = res.data.messages
         console.log('newData', newData)
-            dispatch(setAllContact(newData)); 
+            dispatch(setAllMessage(newData)); 
             let pages = Math.ceil(res.data.totalpages);
+            dispatch(setTotalPage(pages))
     dispatch(setLoading(false))
 
-            dispatch(setTotalPage(pages))
         // }
         
         
@@ -63,11 +63,12 @@ export const getAllContact = (page, pagesize) => (dispatch) =>{
     }).catch(err => dispatch(SetFetchError(true)))
 }
 
-export const getSingleContact = (id) => (dispatch) =>{
+export const getSingleMessage = (id) => (dispatch) =>{
     dispatch(setLoading(true))
-    axios(`https://contact-app-neha.herokuapp.com/contact/get/one/${id}`)
+
+    axios(`https://contact-app-neha.herokuapp.com/message/get/one/${id}`)
     .then((res) => {
-        dispatch(setSingleContact(res.data)); 
+        dispatch(setSingleMessage(res.data)); 
     dispatch(setLoading(false))
 
     }).catch(err => dispatch(SetFetchError(true)))

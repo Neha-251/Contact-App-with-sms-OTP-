@@ -6,15 +6,19 @@ import { composeWithDevTools } from "@redux-devtools/extension";
 import { combineReducers } from 'redux';
 
 import { contactReducer } from './Reducers/contact'
+import { messageReducer } from './Reducers/message'
 
 
 const rootReducer = combineReducers({
-    contact: contactReducer
+    contact: contactReducer,
+    message: messageReducer
 })
 
 export const store = createStore(
     rootReducer,
     {},
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     composeWithDevTools(applyMiddleware(thunk))
 )
+
+
+

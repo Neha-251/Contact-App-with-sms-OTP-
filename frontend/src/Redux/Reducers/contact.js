@@ -10,9 +10,7 @@ const initialState = {
     contactLoading: false
 }
 
-// const photos = state.photos ?
-//       [...state.photos, ...action.data.photo] :
-//       action.data.photo;
+
 export const contactReducer = (state = initialState, {type, payload}) => {
     switch (type){
         case FETCH_ERROR:
