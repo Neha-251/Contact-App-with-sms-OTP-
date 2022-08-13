@@ -5,12 +5,14 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { setLoading } from '../../Redux/Actions/contact';
 import { Loading } from '../Loading';
+import { Home } from '../Home/Home';
 
 
 export const ContactDetails = () => {
 
-    const singleContact = useSelector(state => state.contact.singleContact)
+   
     const loading = useSelector(state => state.contact.loading)
+    const singleContact = useSelector(state => state.contact.singleContact)
 
     const dispatch = useDispatch()
     const [city, setCity] = useState('')
@@ -22,10 +24,13 @@ export const ContactDetails = () => {
 
     return (
         <>
-            <div className=''>
+
+        {window.innerWidth <= 460 && <Home/>}
+        
+            <div className=' lg:h-full md:h-full h-screen py-2 md:py-0 lg:py-0 md:bg-transparent lg:bg-transparent'>
                 {loading && <Loading />}
                 {singleContact._id ?
-                    <div className='border-l p-2 fixed z-10'>
+                    <div className='border-l p-2 text-white fixed z-10'>
                         <div className='flex'>
                             <AiOutlineUser className='text-5xl' />
                             <div>
@@ -42,7 +47,7 @@ export const ContactDetails = () => {
                             <p>Address: {singleContact.address}</p>
                         </div>
                         <div class="gmap_canvas">
-                            <iframe height='300' width='450' title='map' src={`https://maps.google.com/maps?q=${city}&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameborder="0" scrolling="no" ></iframe>
+                            <iframe height='250' width='450' title='map' src={`https://maps.google.com/maps?q=${city}&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameborder="0" scrolling="no" ></iframe>
                             {/* <a href="https://putlocker-is.org"></a> */}
                         </div>
                     </div>

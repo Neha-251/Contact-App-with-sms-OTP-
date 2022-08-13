@@ -4,9 +4,12 @@ import { getAllContact, getSingleContact, setContactLoading, setLoading } from "
 import { Home } from "../Home/Home";
 import {AiOutlineUser} from 'react-icons/ai';
 import { debounce } from "lodash";
+import {useNavigate} from 'react-router-dom';
+import {AiOutlineMessage} from 'react-icons/ai'
 
 export const ContactList = () => {
 
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const allContacts = useSelector(state => state.contact.contacts);
     console.log('allContacts', allContacts)
@@ -15,7 +18,8 @@ export const ContactList = () => {
     const totalPage = useSelector(state => state.contact.totalPage);
 
     const [page, setPage] = useState(1);
-    const [pagesize, setPageSize] = useState(10);
+    console.log('page', page)
+    const [pagesize, setPageSize] = useState(20);
    
 
     
@@ -26,6 +30,7 @@ export const ContactList = () => {
     const handleClick = (id) => {
         dispatch(setLoading(true))
         dispatch(getSingleContact(id))
+        window.innerWidth <= 760 && navigate(`/contact/${id}`)
     }
 
     const observer = useRef()
@@ -62,12 +67,12 @@ export const ContactList = () => {
 
   return (
     <>
-    <div className='pr-6'>
+    <div className='pr-6 w-4/12'>
                 {
                     allContacts.map((el, ind) => {
-                        if(allContacts.length === ind+7){
+                        if(allContacts.length === ind+15){
                             return (
-                                <div ref={lastUserRef} className={ el._id===singleContact._id? "p-2 bg-pink-700 rounded-lg cursor-pointer" :"p-2 cursor-pointer"} key={el._id} onClick={()=> handleClick(el._id)}>
+                                <div ref={lastUserRef} className={ el._id===singleContact._id? "p-2 bg-pink-700 rounded-lg cursor-pointer justify-between flex" : "p-2 justify-between flex cursor-pointer rounded-lg hover:shadow-sm hover:shadow-emerald-400"} key={el._id} onClick={()=> handleClick(el._id)}>
                                     <div>
                                         <div className="flex gap-2">
                                             <AiOutlineUser className="mt-1 text-xl"/>
@@ -76,15 +81,15 @@ export const ContactList = () => {
                                         </div>
                                         <p className='text-sm'>Phone: {el.phone}</p>
                                     </div>
-                                    <div>
-    
+                                    <div className="border border-white">
+                                        <AiOutlineMessage className="mt-1 hover:text-white text-emerald-300 text-2xl" />
                                     </div>
     
                                 </div>
                             )
                         } else {
                             return (
-                                <div className={ el._id===singleContact._id? "p-2 bg-pink-700 rounded-lg cursor-pointer" :"p-2 cursor-pointer"} key={el._id} onClick={()=> handleClick(el._id)}>
+                                <div className={ el._id===singleContact._id? "p-2 justify-between bg-pink-700 rounded-lg cursor-pointer flex" : "p-2 flex justify-between cursor-pointer rounded-lg hover:shadow-sm hover:shadow-emerald-400"} key={el._id} onClick={()=> handleClick(el._id)}>
                                     <div>
                                         <div className="flex gap-2">
                                             <AiOutlineUser className="mt-1 text-xl"/>
@@ -94,7 +99,7 @@ export const ContactList = () => {
                                         <p className='text-sm'>Phone: {el.phone}</p>
                                     </div>
                                     <div>
-    
+                                        <AiOutlineMessage className="mt-1 hover:text-white text-emerald-300 text-2xl" />
                                     </div>
     
                                 </div>
