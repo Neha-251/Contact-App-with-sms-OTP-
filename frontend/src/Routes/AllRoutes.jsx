@@ -15,8 +15,7 @@ export const AllRoutes = () => {
         <>
         <Navbar/>
         <Routes>
-            <Route path='/' element={<Home/>} />
-            <Route path='/contact' element={<Contact/>} />
+            <Route path='/' element={<Contact/>} />
             <Route path='/contact/:id' element={<ContactDetails/>} />
             <Route path='/contact/create' element={<NewContact/>} />
             <Route path='/message' element={<Message/>} />

@@ -13,13 +13,13 @@ export const MessageList = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const allMessages = useSelector(state => state.message.messages);
+
     const loading = useSelector(state => state.message.loading);
     const singleMessage = useSelector(state => state.message.singleMessage);
     const messageLoading = useSelector(state => state.message.messageLoadind)
     const totalPage = useSelector(state => state.message.totalPage);
 
     const [page, setPage] = useState(1);
-    console.log('page', page)
     const [pagesize, setPageSize] = useState(20);
 
 
@@ -69,7 +69,7 @@ export const MessageList = () => {
     return (
         <>
 
-        {loading && <Loading/>}
+            {loading && <Loading />}
             <div className='pr-6 border-r lg:w-4/12 md:w-4/12'>
                 {
                     allMessages.map((el, ind) => {
@@ -77,14 +77,13 @@ export const MessageList = () => {
                             return (
                                 <div ref={lastUserRef} className={el._id === singleMessage._id ? "p-2 bg-pink-700 rounded-lg cursor-pointer justify-between flex" : "p-2 justify-between flex cursor-pointer rounded-lg hover:shadow-sm hover:shadow-emerald-400"} key={el._id} onClick={() => handleClick(el._id)}>
                                     <div>
-                                        <div className="flex">
+                                        <div className="flex gap-1">
                                             <AiOutlineUser className="mt-1 text-xl" />
-                                            <p className='text-sm'>{el.messsage}</p>
+                                            <p className='mt-0.5 text-xl'>{el.receiver.firstName}</p>
+                                            <p className='mt-0.5 text-xl'>{el.receiver.lastName}</p>
                                         </div>
                                     </div>
-                                    <div >
-                                        <AiOutlineMessage className="mt-1 hover:text-white text-emerald-300 text-2xl" />
-                                    </div>
+                                    
 
                                 </div>
                             )
@@ -92,14 +91,14 @@ export const MessageList = () => {
                             return (
                                 <div className={el._id === singleMessage._id ? "p-2 justify-between bg-pink-700 rounded-lg cursor-pointer flex" : "p-2 flex justify-between cursor-pointer rounded-lg hover:shadow-sm hover:shadow-emerald-400"} key={el._id} onClick={() => handleClick(el._id)}>
                                     <div>
-                                        <div className="flex">
-                                            <AiOutlineUser className="mt-1 text-xl" />
-                                            <p className='text-sm'>{el.messsage}</p>
+                                        <div className="flex gap-1">
+                                            <AiOutlineUser className="mt text-2xl" />
+                                            <p className='mt-0.5 text-xl'>{el.receiver.firstName}</p>
+                                            <p className='mt-0.5 text-xl'>{el.receiver.lastName}</p>
                                         </div>
+                                        <div className="overflow-hidden"><p className="text-sm text-slate-400">{el.message}</p></div>
                                     </div>
-                                    <div >
-                                        <AiOutlineMessage className="mt-1 hover:text-white text-emerald-300 text-2xl" />
-                                    </div>
+                                    
 
                                 </div>
                             )

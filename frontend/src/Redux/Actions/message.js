@@ -1,4 +1,4 @@
-import { ALL_MESSAGE, SINGLE_MESSAGE, FETCH_ERROR, TOTAL_PAGE, LOADING, MESSAGE_LOADING} from '../Constants/message'
+import { ALL_MESSAGE, SINGLE_MESSAGE, FETCH_ERROR, TOTAL_PAGE, LOADING, MESSAGE_LOADING, CURRENT_MESSAGE} from '../Constants/message'
 import axios from 'axios';
 
 export const setAllMessage = (payload)=> {
@@ -43,6 +43,12 @@ export const setMessageLoading = (payload) => {
     }
 }
 
+export const setCurrentMessage = (payload) => {
+    return {
+        type: CURRENT_MESSAGE,
+        payload: payload
+    }
+}
 
 export const getAllMessage = (page, pagesize) => (dispatch) =>{
     dispatch(setLoading(true))
@@ -50,15 +56,11 @@ export const getAllMessage = (page, pagesize) => (dispatch) =>{
     axios(`https://contact-app-neha.herokuapp.com/message/get/all?page=${page}&pagesize=${pagesize}`)
     .then((res) => {
         let newData = res.data.messages
-        console.log('newData', newData)
             dispatch(setAllMessage(newData)); 
             let pages = Math.ceil(res.data.totalpages);
             dispatch(setTotalPage(pages))
     dispatch(setLoading(false))
 
-        // }
-        
-        
        
     }).catch(err => dispatch(SetFetchError(true)))
 }

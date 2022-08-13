@@ -1,4 +1,4 @@
-import { ALL_MESSAGE, SINGLE_MESSAGE, FETCH_ERROR, TOTAL_PAGE, LOADING, MESSAGE_LOADING} from '../Constants/message'
+import { ALL_MESSAGE, SINGLE_MESSAGE, FETCH_ERROR, TOTAL_PAGE, LOADING, MESSAGE_LOADING, CURRENT_MESSAGE} from '../Constants/message'
 
 
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
     fetchError: false,
     totalPage: 0,
     loading: false,
+    currentMessage: '',
     messageLoading: false
 }
 
@@ -28,6 +29,8 @@ export const messageReducer = (state = initialState, {type, payload}) => {
             return {...state, totalPage: payload}
         case LOADING:
             return { ...state, loading: payload}
+        case CURRENT_MESSAGE:
+            return {...state, currentMessage: payload}
         default:
             return state
     }

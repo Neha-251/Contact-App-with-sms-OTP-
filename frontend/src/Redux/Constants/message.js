@@ -5,6 +5,7 @@ export const ALL_MESSAGE = "ALL_MESSAGE";
 export const FETCH_ERROR = "FETCH_ERROR";
 
 export const SINGLE_MESSAGE = "SINGLE_MESSAGE";
+export const CURRENT_MESSAGE = "CURRENT_MESSAGE";
 
 export const TOTAL_PAGE = "TOTAL_PAGE";
 

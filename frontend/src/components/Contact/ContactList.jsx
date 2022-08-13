@@ -5,8 +5,8 @@ import { Home } from "../Home/Home";
 import { AiOutlineUser } from 'react-icons/ai';
 import { debounce } from "lodash";
 import { useNavigate } from 'react-router-dom';
-import { AiOutlineMessage } from 'react-icons/ai'
 import { Loading } from "../Loading";
+import { SendMessage } from "./sendMessage";
 
 export const ContactList = () => {
 
@@ -62,6 +62,7 @@ export const ContactList = () => {
     )
 
 
+    
 
     return (
         <>
@@ -80,9 +81,7 @@ export const ContactList = () => {
                                         </div>
                                         <p className='text-sm'>Phone: {el.phone}</p>
                                     </div>
-                                    <div className="">
-                                        <AiOutlineMessage className="mt-1 hover:text-white text-emerald-300 text-2xl" />
-                                    </div>
+                                    <SendMessage id={el._id}/>
 
                                 </div>
                             )
@@ -97,10 +96,7 @@ export const ContactList = () => {
                                         </div>
                                         <p className='text-sm'>Phone: {el.phone}</p>
                                     </div>
-                                    <div>
-                                        <AiOutlineMessage className="mt-1 hover:text-white text-emerald-300 text-2xl" />
-                                    </div>
-
+                                    <SendMessage id={el._id}/>
                                 </div>
                             )
                         }

@@ -50,7 +50,6 @@ export const getAllContact = (page, pagesize) => (dispatch) =>{
     axios(`https://contact-app-neha.herokuapp.com/contact/get/all?page=${page}&pagesize=${pagesize}`)
     .then((res) => {
         let newData = res.data.contacts
-        console.log('newData', newData)
             dispatch(setAllContact(newData)); 
             let pages = Math.ceil(res.data.totalpages);
     dispatch(setLoading(false))
