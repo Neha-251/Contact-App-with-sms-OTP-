@@ -5,6 +5,7 @@ const cors = require('cors');
 const ContactController = require('./controllers/contact.controller');
 const MessageController = require('./controllers/message.controller');
 
+app.use(express.json())
 app.use(cors());
 
 app.use('/contact', ContactController);

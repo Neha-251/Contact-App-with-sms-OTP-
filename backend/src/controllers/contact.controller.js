@@ -14,7 +14,7 @@ console.log("yes came here")
 //     }
 // });
 
-router.post('/', async(req, res) => {
+router.post('/create', async(req, res) => {
     console.log('req', req.body)
 
     try{
@@ -23,7 +23,6 @@ router.post('/', async(req, res) => {
         // return res.status(200).send({message: 'Contact is Saved'});
     }
     catch(err) {
-        // return res.status(440).send(err)
         return res.status(440).send({message: err.message})
     }
 })
@@ -34,11 +33,9 @@ router.get('/get/all', async(req, res) => {
         let pagesize = req.query.pagesize || 5;
         const skip = (page - 1) * pagesize;
 
-
         const contacts = await Contact.find().skip(skip).limit(pagesize);
         const totalpages = Math.ceil(await Contact.find().countDocuments()) / pagesize;
         return res.status(200).send({contacts, totalpages})
-
     }
     catch(err) {
         return res.status(400).send({message: err.message})
